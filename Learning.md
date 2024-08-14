@@ -66,3 +66,29 @@ go build HelloWorld.go
 	f := "apple"
 	fmt.Println(f) // apple || shorthand Initialization and assignment expression [var f string = "apple"]
 ```
+
+### 4) Constants:
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+const s string = "constant"
+
+func main() {
+	fmt.Println(s) // constant || Accessible from outside of main func
+
+	const n = 500000000
+
+	const d = 3e20 / n
+	fmt.Println(d) // 6e+11 || the value of d
+
+	fmt.Println(int64(d)) // 600000000000 || Here it had no type but the type is given as int64 by an explicit conversion
+
+	fmt.Println(math.Sin(n)) // -0.28470407323754404 || A number can be given a type by using it in a context that requires one, such as a variable assignment or function call. For example, here math.Sin expects a float64.
+}
+```
