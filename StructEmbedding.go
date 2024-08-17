@@ -19,6 +19,7 @@ func (b base) describe() string {
 type container struct {
 	base
 	str string
+	num int
 }
 
 func main() {
@@ -26,11 +27,13 @@ func main() {
 	co := container{
 		base: base{num: 1,},
 		str: "some name",
+		// num: 20,
 	}
 
 	// We can access the base's fields directly on co, e.g. co.num.
 	fmt.Printf("co={num: %v, str: %v}\n", co.num, co.str)
 	// co={num: 1, str: some name}
+	// co={num: 20, str: some name} || if the same num exists on container
 
 	// Alternatively, we can spell out the full path using the embedded type name.
 	fmt.Println("alos num:", co.base.num)
