@@ -457,3 +457,48 @@ func main() {
 	fmt.Println("Ticker stopped")
 }
 ```
+
+### 38) Worker Pool:
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+// Worker function that processes jobs from the jobs channel
+func worker(id int, jobs <-chan int, results chan<- int) {
+	for j := range jobs {
+		fmt.Printf("Worker %d started job %d\n", id, j)
+		time.Sleep(time.Second) // Simulate work
+		fmt.Printf("Worker %d finished job %d\n", id, j)
+		results <- j * 2 // Example of processing
+	}
+}
+
+func main() {
+	const numJobs = 10
+	jobs := make(chan int, numJobs)
+	results := make(chan int, numJobs)
+
+	// Start 3 workers
+	for w := 1; w <= 3; w++ {
+		go worker(w, jobs, results)
+	}
+	fmt.Println("Added jobs list to worker")
+
+	// Send 5 jobs to the jobs channel
+	for j := 1; j <= numJobs; j++ {
+		fmt.Println("Adding job:", j)
+		jobs <- j
+	}
+	close(jobs) // Close the jobs channel to indicate no more jobs will be sent
+
+	// Collect results
+	for a := 1; a <= numJobs; a++ {
+		fmt.Printf("Result from Job: %d\n", <-results)
+	}
+}
+```
