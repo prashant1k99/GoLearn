@@ -10,7 +10,7 @@ func ping(pings chan<- string, msg string) {
 }
 
 // The pong function accepts one channel for receives (pings) and a second for sends (pongs).
-func pong(pings <-chan string, pongs chan <- string) {
+func pong(pings <-chan string, pongs chan<- string) {
 	msg := <-pings
 	pongs <- msg
 }

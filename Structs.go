@@ -7,7 +7,7 @@ import "fmt"
 // This person struct type has name and age fields.
 type person struct {
 	name string
-	age int
+	age  int
 }
 
 // newPerson constructs a new person struct with the given name.
@@ -59,9 +59,9 @@ func main() {
 	// If a struct type is only used for a single value, we don't have to give it a name.
 	// The value can have an anonymous struct type. This technique is commonly used for tabledriven tests
 	dog := struct {
-		name string
+		name   string
 		isGood bool
-	} {
+	}{
 		"Rex",
 		true,
 	}

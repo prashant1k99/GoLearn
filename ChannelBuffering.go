@@ -13,8 +13,8 @@ func main() {
 	messages <- "channel"
 
 	// Later we can receive these two values as usual.
-	fmt.Println(<- messages)
+	fmt.Println(<-messages)
 	// buffered
-	fmt.Println(<- messages)
+	fmt.Println(<-messages)
 	// channel
 }
