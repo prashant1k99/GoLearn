@@ -1,73 +1,3 @@
-### 61) SHA256 Hashes:
-```go
-package main
-
-// Go implements several hash functions in various crypto/* packages.
-import (
-	"crypto/sha256"
-	"fmt"
-)
-
-// SHA256 hashes are frequently used to compute short identities for binary or text blobs. For example, TLS/SSL certificates use SHA256 to compute a certificate's signature. Here's how to compute SHA256 hashes in Go.
-
-func main() {
-	s := "sha256 this is sgtring"
-
-	// Here we start with a new hash
-	h := sha256.New()
-
-	// Write expects bytes. If you hace a string s, use []byte(s) to coerce it to bytes
-	h.Write([]byte(s))
-
-	// This gets the finalized hash result as a byte slice. THe argument to Sum can be used to append to an exisitng byte slice: it usually isn't needed.
-	bs := h.Sum(nil)
-
-	fmt.Println(s)
-	// sha256 this is sgtring
-	fmt.Printf("%x\n", bs)
-	// 3a97e70165a808c6d867ecb3d250de8712822c619aeedd6dd7f7794117b37a16
-}
-```
-
-### 62) Base64 Encoding:
-```go
-package main
-
-// This syntax imports the encoding/base64 package with the b64 name instead of the default base64. It’ll save us some space below.
-import (
-	b64 "encoding/base64"
-	"fmt"
-)
-
-// Go provides built-in support for base64 encodign/decoding
-
-func main() {
-	// Here's the string we'll encode/decode
-	data := "prashant1234567890"
-
-	// Go supports both standard and URL-compatible base64. Here’s how to encode using the standard encoder. The encoder requires a []byte so we convert our string to that type.
-	sEnc := b64.StdEncoding.EncodeToString([]byte(data))
-	fmt.Println(sEnc)
-	// cHJhc2hhbnQxMjM0NTY3ODkw
-
-	// Decoding may return an error, which you can check if you don’t already know the input to be well-formed.
-	sDec, _ := b64.StdEncoding.DecodeString(sEnc)
-	fmt.Println(string(sDec))
-	// prashant1234567890
-
-	// This encodes/decodes using a URL-compatible base64 format
-	// uEnc := b64.URLEncoding.EncodeToString([]byte(data))
-	uEnc := b64.URLEncoding.EncodeToString([]byte(data))
-	fmt.Println(uEnc)
-	// cHJhc2hhbnQxMjM0NTY3ODkw
-	uDec, _ := b64.URLEncoding.DecodeString(uEnc)
-	fmt.Println(string(uDec))
-	// prashant1234567890
-}
-```
-
-### 63) Reading Files:
-```go
 package main
 
 import (
@@ -150,4 +80,3 @@ func main() {
 	// Close the file when you’re done (usually this would be scheduled immediately after Opening with defer).
 	defer f.Close()
 }
-```
